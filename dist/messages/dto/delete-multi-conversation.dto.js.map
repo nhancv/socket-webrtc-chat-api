@@ -1,0 +1,1 @@
+{"version":3,"file":"delete-multi-conversation.dto.js","sourceRoot":"","sources":["../../../src/messages/dto/delete-multi-conversation.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAA2C;AAC3C,6CAA4C;AAE5C,MAAa,0BAA0B;IAMnC,YAAY,QAAkB;QAC1B,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;IAC7B,CAAC;CACJ;AALG;IAFC,4BAAU,EAAE;IACZ,qBAAW,EAAE;;4DACK;AAJvB,gEASC"}

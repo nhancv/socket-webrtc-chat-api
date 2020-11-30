@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle-notification.dto.js","sourceRoot":"","sources":["../../../src/notifications/dto/bundle-notification.dto.ts"],"names":[],"mappings":";;;AACA,MAAa,qBAAqB;IAM9B,YAAY,GAAW,EAAE,IAAY,EAAE,MAAc;QACjD,IAAI,CAAC,GAAG,GAAG,GAAG,CAAC;QACf,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;IACzB,CAAC;CACJ;AAXD,sDAWC"}
