@@ -137,7 +137,7 @@ nano firebase-adminsdk.json
 ```
 # Install dep
 npm i
-pm2 start npm --name freehang-prod -- run start
+pm2 start npm --name freehang-prod -- run start:prod
 ```
 - Reload app
 ```
