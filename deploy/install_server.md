@@ -132,6 +132,11 @@ cd secret
 nano firebase-adminsdk.json
 ```
 
+## Open firewall ports
+```
+sudo ufw allow 3000
+```
+
 ## Run app
 - In the first time
 ```
