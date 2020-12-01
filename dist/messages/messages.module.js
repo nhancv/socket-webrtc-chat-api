@@ -13,7 +13,6 @@ const messages_service_1 = require("./messages.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const message_schema_1 = require("./schemas/message.schema");
 const realtime_module_1 = require("../realtime/realtime.module");
-const aws_s3_module_1 = require("../aws-s3/aws-s3.module");
 const platform_express_1 = require("@nestjs/platform-express");
 const config_1 = require("@nestjs/config");
 const path_1 = require("path");
@@ -23,7 +22,6 @@ let MessagesModule = class MessagesModule {
 MessagesModule = __decorate([
     common_1.Module({
         imports: [
-            aws_s3_module_1.AwsS3Module,
             common_1.forwardRef(() => realtime_module_1.RealtimeModule),
             mongoose_1.MongooseModule.forFeature([
                 { name: message_schema_1.Message.name, schema: message_schema_1.MessageSchema },

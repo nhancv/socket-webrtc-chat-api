@@ -39,7 +39,7 @@ export class MessagesController {
     constructor(
         private readonly messagesService: MessagesService,
         private readonly realtimeService: RealtimeService,
-        private readonly awsS3Service: AwsS3Service
+        // private readonly awsS3Service: AwsS3Service
     ) {
     }
 
@@ -273,7 +273,7 @@ export class MessagesController {
         const awsFilePath = `${env}/messages/${uid}_${filename}`;
         try {
             // Upload original image
-            await this.awsS3Service.uploadFile(bucketName, filePath, awsFilePath);
+            // await this.awsS3Service.uploadFile(bucketName, filePath, awsFilePath);
 
             const isImage = require('is-image');
             if (isImage(filePath)) {
@@ -302,7 +302,7 @@ export class MessagesController {
                     const output: OutputInfo = await sharpFile.resize(Math.floor(w / resizeFactor), Math.floor(h / resizeFactor)).toFile(filePreviewPath);
                     fileW = output.width;
                     fileH = output.height;
-                    await this.awsS3Service.uploadFile(bucketName, filePreviewPath, awsFileReviewPath);
+                    // await this.awsS3Service.uploadFile(bucketName, filePreviewPath, awsFileReviewPath);
                     try {
                         fs.unlinkSync(filePreviewPath);
                     } catch (e) {

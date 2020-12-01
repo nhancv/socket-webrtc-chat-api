@@ -11,7 +11,7 @@ import {AwsS3Module} from "../aws-s3/aws-s3.module";
 import {FriendsModule} from "../friends/friends.module";
 @Module({
     imports: [
-        AwsS3Module,
+        // AwsS3Module,
         forwardRef(() => FriendsModule),
         MongooseModule.forFeature([{name: User.name, schema: UserSchema}]),
         MulterModule.registerAsync({

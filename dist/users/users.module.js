@@ -16,14 +16,12 @@ const platform_express_1 = require("@nestjs/platform-express");
 const config_1 = require("@nestjs/config");
 const path_1 = require("path");
 const multer_1 = require("multer");
-const aws_s3_module_1 = require("../aws-s3/aws-s3.module");
 const friends_module_1 = require("../friends/friends.module");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     common_1.Module({
         imports: [
-            aws_s3_module_1.AwsS3Module,
             common_1.forwardRef(() => friends_module_1.FriendsModule),
             mongoose_1.MongooseModule.forFeature([{ name: user_schema_1.User.name, schema: user_schema_1.UserSchema }]),
             platform_express_1.MulterModule.registerAsync({

@@ -5,38 +5,40 @@ import {AllExceptionsFilter} from "./utils/all-exceptions.filter";
 import {Logger, ValidationPipe} from "@nestjs/common";
 import {MigrationModule} from "./migration/migration.module";
 import {MigrationService} from "./migration/migration.service";
-// https://github.com/justadudewhohacks/face-api.js/blob/master/examples/examples-nodejs/ageAndGenderRecognition.ts
-import * as faceapi from 'face-api.js';
-// Import a fetch implementation for Node.js
-import fetch from 'node-fetch';
-import {tinyFaceDetector} from "face-api.js";
-// implements nodejs wrappers for HTMLCanvasElement, HTMLImageElement, ImageData
-const canvas = require('canvas')
-// patch nodejs environment, we need to provide an implementation of
-// HTMLCanvasElement and HTMLImageElement
-const { Canvas, Image, ImageData } = canvas
-faceapi.env.monkeyPatch({ Canvas, Image, ImageData, fetch })
-// Config model
-// const faceDetectionNet = faceapi.nets.ssdMobilenetv1
-export const faceDetectionNet = faceapi.nets.tinyFaceDetector
-// SsdMobilenetv1Options
-const minConfidence = 0.6
-// TinyFaceDetectorOptions
-const inputSize = 320
-const scoreThreshold = 0.6
-function getFaceDetectorOptions(net: faceapi.NeuralNetwork<any>) {
-    return net === faceapi.nets.ssdMobilenetv1
-        ? new faceapi.SsdMobilenetv1Options({ minConfidence })
-        : new faceapi.TinyFaceDetectorOptions({ inputSize, scoreThreshold })
-}
-export const faceDetectionOptions = getFaceDetectorOptions(faceDetectionNet);
+// Disable face detect
+// // https://github.com/justadudewhohacks/face-api.js/blob/master/examples/examples-nodejs/ageAndGenderRecognition.ts
+// import * as faceapi from 'face-api.js';
+// // Import a fetch implementation for Node.js
+// import fetch from 'node-fetch';
+// import {tinyFaceDetector} from "face-api.js";
+// // implements nodejs wrappers for HTMLCanvasElement, HTMLImageElement, ImageData
+// const canvas = require('canvas')
+// // patch nodejs environment, we need to provide an implementation of
+// // HTMLCanvasElement and HTMLImageElement
+// const { Canvas, Image, ImageData } = canvas
+// faceapi.env.monkeyPatch({ Canvas, Image, ImageData, fetch })
+// // Config model
+// // const faceDetectionNet = faceapi.nets.ssdMobilenetv1
+// export const faceDetectionNet = faceapi.nets.tinyFaceDetector
+// // SsdMobilenetv1Options
+// const minConfidence = 0.6
+// // TinyFaceDetectorOptions
+// const inputSize = 320
+// const scoreThreshold = 0.6
+// function getFaceDetectorOptions(net: faceapi.NeuralNetwork<any>) {
+//     return net === faceapi.nets.ssdMobilenetv1
+//         ? new faceapi.SsdMobilenetv1Options({ minConfidence })
+//         : new faceapi.TinyFaceDetectorOptions({ inputSize, scoreThreshold })
+// }
+// export const faceDetectionOptions = getFaceDetectorOptions(faceDetectionNet);
 
 async function bootstrap() {
 
-    // Load pre-model to face-api
-    await faceDetectionNet.loadFromDisk('weights')
-    await faceapi.nets.faceLandmark68Net.loadFromDisk('weights')
-    await faceapi.nets.ageGenderNet.loadFromDisk('weights')
+    // Disable face detect
+    // // Load pre-model to face-api
+    // await faceDetectionNet.loadFromDisk('weights')
+    // await faceapi.nets.faceLandmark68Net.loadFromDisk('weights')
+    // await faceapi.nets.ageGenderNet.loadFromDisk('weights')
 
     // const img = await canvas.loadImage('../images/bbt1.jpg')
     // const results = await faceapi.detectAllFaces(img, faceDetectionOptions)

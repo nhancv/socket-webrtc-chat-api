@@ -49,14 +49,12 @@ const realtime_service_1 = require("../realtime/realtime.service");
 const api_implicit_query_decorator_1 = require("@nestjs/swagger/dist/decorators/api-implicit-query.decorator");
 const platform_express_1 = require("@nestjs/platform-express");
 const api_file_decorator_1 = require("../utils/api-file.decorator");
-const aws_s3_service_1 = require("../aws-s3/aws-s3.service");
 const delete_multi_conversation_dto_1 = require("./dto/delete-multi-conversation.dto");
 const upload_file_dto_1 = require("./dto/upload-file.dto");
 let MessagesController = MessagesController_1 = class MessagesController {
-    constructor(messagesService, realtimeService, awsS3Service) {
+    constructor(messagesService, realtimeService) {
         this.messagesService = messagesService;
         this.realtimeService = realtimeService;
-        this.awsS3Service = awsS3Service;
         this.logger = new common_1.Logger(MessagesController_1.name);
     }
     async getMessages(rightId, from, to, payload) {
@@ -149,7 +147,6 @@ let MessagesController = MessagesController_1 = class MessagesController {
         const filePath = `./${multerDest}/${filename}`;
         const awsFilePath = `${env}/messages/${uid}_${filename}`;
         try {
-            await this.awsS3Service.uploadFile(bucketName, filePath, awsFilePath);
             const isImage = require('is-image');
             if (isImage(filePath)) {
                 let fileW = 0;
@@ -173,7 +170,6 @@ let MessagesController = MessagesController_1 = class MessagesController {
                     const output = await sharpFile.resize(Math.floor(w / resizeFactor), Math.floor(h / resizeFactor)).toFile(filePreviewPath);
                     fileW = output.width;
                     fileH = output.height;
-                    await this.awsS3Service.uploadFile(bucketName, filePreviewPath, awsFileReviewPath);
                     try {
                         fs.unlinkSync(filePreviewPath);
                     }
@@ -374,8 +370,7 @@ MessagesController = MessagesController_1 = __decorate([
     swagger_1.ApiTags('messages'),
     common_1.Controller('messages'),
     __metadata("design:paramtypes", [messages_service_1.MessagesService,
-        realtime_service_1.RealtimeService,
-        aws_s3_service_1.AwsS3Service])
+        realtime_service_1.RealtimeService])
 ], MessagesController);
 exports.MessagesController = MessagesController;
 //# sourceMappingURL=messages.controller.js.map

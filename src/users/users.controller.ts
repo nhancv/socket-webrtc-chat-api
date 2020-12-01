@@ -33,12 +33,13 @@ import {
 import {ApiBodyFile} from "../utils/api-file.decorator";
 import {SearchUserDto} from "./dto/search-user.dto";
 import {DetectGenderDto} from "./dto/detect-gender.dto";
-import {AwsS3Service} from "../aws-s3/aws-s3.service";
+// import {AwsS3Service} from "../aws-s3/aws-s3.service";
 import {FriendsService} from "../friends/friends.service";
 import {UserRelationshipDto} from "../friends/dto/user-relationship.dto";
-import * as faceapi from "face-api.js";
-import {faceDetectionOptions} from "../main";
 import sharp, {OutputInfo, Sharp} from "sharp";
+// Disable face detect
+// import * as faceapi from "face-api.js";
+// import {faceDetectionOptions} from "../main";
 
 @ApiTags('users')
 @Controller('users')
@@ -49,7 +50,7 @@ export class UsersController {
     constructor(
         private readonly friendsService: FriendsService,
         private readonly usersService: UsersService,
-        private readonly awsS3Service: AwsS3Service
+        // private readonly awsS3Service: AwsS3Service
     ) {
     }
 
@@ -163,7 +164,7 @@ export class UsersController {
         const uid = payload.uid;
         const filePath = `./${multerDest}/` + filename;
         const awsFilePath = `${env}/avatars/${uid}_${filename}`;
-        await this.awsS3Service.uploadFile(bucketName, filePath, awsFilePath);
+        // await this.awsS3Service.uploadFile(bucketName, filePath, awsFilePath);
         try {
             fs.unlinkSync(filePath);
         } catch (e) {
@@ -231,20 +232,22 @@ export class UsersController {
                         .resize(Math.floor(w / resizeFactor), Math.floor(h / resizeFactor))
                         .toFile(filePreviewPath);
 
-                    const canvas = require('canvas');
-                    const img = await canvas.loadImage(filePreviewPath);
-                    const result = await faceapi
-                        .detectSingleFace(img, faceDetectionOptions)
-                        .withAgeAndGender();
-                    if (result) {
-                        response.data = {
-                            age: faceapi.utils.round(result.age, 0),
-                            gender: result.gender,
-                            probability: faceapi.utils.round(result.genderProbability)
-                        };
-                    } else {
-                        response.error = notFoundE;
-                    }
+                    // Disable face detect
+                    // const canvas = require('canvas');
+                    // const img = await canvas.loadImage(filePreviewPath);
+                    // const result = await faceapi
+                    //     .detectSingleFace(img, faceDetectionOptions)
+                    //     .withAgeAndGender();
+                    // if (result) {
+                    //     response.data = {
+                    //         age: faceapi.utils.round(result.age, 0),
+                    //         gender: result.gender,
+                    //         probability: faceapi.utils.round(result.genderProbability)
+                    //     };
+                    // } else {
+                    //     response.error = notFoundE;
+                    // }
+                    response.error = notFoundE;
 
                     try {
                         fs.unlinkSync(filePreviewPath);

@@ -48,17 +48,13 @@ const swagger_1 = require("@nestjs/swagger");
 const api_file_decorator_1 = require("../utils/api-file.decorator");
 const search_user_dto_1 = require("./dto/search-user.dto");
 const detect_gender_dto_1 = require("./dto/detect-gender.dto");
-const aws_s3_service_1 = require("../aws-s3/aws-s3.service");
 const friends_service_1 = require("../friends/friends.service");
 const user_relationship_dto_1 = require("../friends/dto/user-relationship.dto");
-const faceapi = __importStar(require("face-api.js"));
-const main_1 = require("../main");
 const sharp_1 = __importDefault(require("sharp"));
 let UsersController = UsersController_1 = class UsersController {
-    constructor(friendsService, usersService, awsS3Service) {
+    constructor(friendsService, usersService) {
         this.friendsService = friendsService;
         this.usersService = usersService;
-        this.awsS3Service = awsS3Service;
         this.logger = new common_1.Logger(UsersController_1.name);
     }
     async create(user, payload) {
@@ -118,7 +114,6 @@ let UsersController = UsersController_1 = class UsersController {
         const uid = payload.uid;
         const filePath = `./${multerDest}/` + filename;
         const awsFilePath = `${env}/avatars/${uid}_${filename}`;
-        await this.awsS3Service.uploadFile(bucketName, filePath, awsFilePath);
         try {
             fs.unlinkSync(filePath);
         }
@@ -165,21 +160,7 @@ let UsersController = UsersController_1 = class UsersController {
                     await sharpFile
                         .resize(Math.floor(w / resizeFactor), Math.floor(h / resizeFactor))
                         .toFile(filePreviewPath);
-                    const canvas = require('canvas');
-                    const img = await canvas.loadImage(filePreviewPath);
-                    const result = await faceapi
-                        .detectSingleFace(img, main_1.faceDetectionOptions)
-                        .withAgeAndGender();
-                    if (result) {
-                        response.data = {
-                            age: faceapi.utils.round(result.age, 0),
-                            gender: result.gender,
-                            probability: faceapi.utils.round(result.genderProbability)
-                        };
-                    }
-                    else {
-                        response.error = notFoundE;
-                    }
+                    response.error = notFoundE;
                     try {
                         fs.unlinkSync(filePreviewPath);
                     }
@@ -302,8 +283,7 @@ UsersController = UsersController_1 = __decorate([
     swagger_1.ApiTags('users'),
     common_1.Controller('users'),
     __metadata("design:paramtypes", [friends_service_1.FriendsService,
-        users_service_1.UsersService,
-        aws_s3_service_1.AwsS3Service])
+        users_service_1.UsersService])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map

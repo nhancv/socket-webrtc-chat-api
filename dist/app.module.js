@@ -51,7 +51,6 @@ const user_settings_module_1 = require("./user-settings/user-settings.module");
 const guest_module_1 = require("./guest/guest.module");
 const admins_module_1 = require("./admins/admins.module");
 const supports_module_1 = require("./supports/supports.module");
-const aws_s3_module_1 = require("./aws-s3/aws-s3.module");
 const migration_module_1 = require("./migration/migration.module");
 const app_config_module_1 = require("./app-config/app-config.module");
 let AppModule = class AppModule {
@@ -86,7 +85,6 @@ AppModule = __decorate([
             guest_module_1.GuestModule,
             admins_module_1.AdminsModule,
             supports_module_1.SupportsModule,
-            aws_s3_module_1.AwsS3Module,
             migration_module_1.MigrationModule,
             app_config_module_1.AppConfigModule
         ],

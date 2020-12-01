@@ -12,7 +12,7 @@ import { diskStorage } from "multer";
 
 @Module({
     imports: [
-        AwsS3Module,
+        // AwsS3Module,
         forwardRef(() => RealtimeModule),
         MongooseModule.forFeature([
             {name: Message.name, schema: MessageSchema},

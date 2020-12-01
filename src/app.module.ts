@@ -53,7 +53,7 @@ import {AppConfigModule} from './app-config/app-config.module';
         GuestModule,
         AdminsModule,
         SupportsModule,
-        AwsS3Module,
+        // AwsS3Module,
         MigrationModule,
         AppConfigModule
     ],
