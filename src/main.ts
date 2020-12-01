@@ -52,8 +52,8 @@ async function bootstrap() {
     app.useGlobalFilters(new AllExceptionsFilter());
     app.useGlobalPipes(new ValidationPipe());
 
-    // Setup swagger in dev mode only
-    if (process.env.ENV == 'dev') {
+    // Setup swagger
+    // if (process.env.ENV == 'dev') {
         // Enable Swagger api docs module
         const changeLog =
             `
@@ -70,7 +70,7 @@ async function bootstrap() {
             .build();
         const document = SwaggerModule.createDocument(app, options);
         SwaggerModule.setup('docs', app, document);
-    }
+    // }
 
     // Get migration module: https://docs.nestjs.com/standalone-applications
     const migrationService = app.select(MigrationModule).get(MigrationService, {strict: true});

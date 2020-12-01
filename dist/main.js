@@ -14,21 +14,19 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.useGlobalFilters(new all_exceptions_filter_1.AllExceptionsFilter());
     app.useGlobalPipes(new common_1.ValidationPipe());
-    if (process.env.ENV == 'dev') {
-        const changeLog = `
+    const changeLog = `
 ### Change log
 - 
 `;
-        const options = new swagger_1.DocumentBuilder()
-            .setVersion((_a = process.env.npm_package_version) !== null && _a !== void 0 ? _a : '')
-            .setTitle('freehang api')
-            .setDescription(changeLog)
-            .addTag('default')
-            .addBearerAuth()
-            .build();
-        const document = swagger_1.SwaggerModule.createDocument(app, options);
-        swagger_1.SwaggerModule.setup('docs', app, document);
-    }
+    const options = new swagger_1.DocumentBuilder()
+        .setVersion((_a = process.env.npm_package_version) !== null && _a !== void 0 ? _a : '')
+        .setTitle('freehang api')
+        .setDescription(changeLog)
+        .addTag('default')
+        .addBearerAuth()
+        .build();
+    const document = swagger_1.SwaggerModule.createDocument(app, options);
+    swagger_1.SwaggerModule.setup('docs', app, document);
     const migrationService = app.select(migration_module_1.MigrationModule).get(migration_service_1.MigrationService, { strict: true });
     await migrationService.migrate();
     const port = process.env.ENV === 'dev' ? 3001 : 3000;
