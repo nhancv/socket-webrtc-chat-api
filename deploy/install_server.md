@@ -97,7 +97,7 @@ mongo -u u_freehang -p DB_PASSWORD_HERE 127.0.0.1/freehang
 ## Prepare source
 - Clone source 
 ```
-git clone https://github.com/brianpattaya/freehang-api.git
+git clone https://github.com/nhancv/freehang-api.git
 cd freehang-api
 ```
 
