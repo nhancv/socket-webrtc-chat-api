@@ -1,8 +1,12 @@
 
+sudo ln -s /root/wordspaces/api.freehang.com/dist /var/www/api.freehang.com
 sudo nano /etc/nginx/sites-available/api.freehang.com
 server {
     listen 80;
     listen [::]:80;
+
+    root /var/www/api.freehang.com;
+    index index.html index.htm index.nginx-debian.html;
 
     server_name api.freehang.com;
 

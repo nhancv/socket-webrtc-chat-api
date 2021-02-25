@@ -2,7 +2,7 @@
 
 ## Server
 ```
-ssh root@104.248.90.40
+ssh root@1.2.3.4
 ```
 
 ## Setup git
@@ -94,6 +94,33 @@ sudo service mongod status
 mongo -u u_freehang -p DB_PASSWORD_HERE 127.0.0.1/freehang
 ```
 
+## (OPTIONAL FOR DOMAIN)
+## Install nginx
+```
+sudo apt update
+sudo apt install nginx
+sudo systemctl enable nginx
+sudo systemctl status nginx
+```
+
+## Create domain config
+```
+File: api.freehang.com
+```
+
+## Setup SSL Https
+```
+sudo apt update
+sudo apt install software-properties-common -y
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt update
+sudo apt install certbot python-certbot-nginx  -y
+sudo certbot --nginx
+
+* Select redirect all request to HTTPS, nginx will update domain config automatically
+```
+
 ## Prepare source
 - Clone source 
 ```
@@ -158,29 +185,27 @@ pm2 logs freehang-prod
 ```
 DEV:
 dev.freehang.com
-- http://104.248.90.40:3002/
+- http://1.2.3.4:3002/
 
 api.dev.freehang.com
-- http://104.248.90.40:3001/api
-- http://104.248.90.40:3001/docs
+- http://1.2.3.4:3001/api
+- http://1.2.3.4:3001/docs
 
 Prod: 
 freehang.com
-- http://104.248.90.40:3002/
+- http://1.2.3.4:3002/
 
 api.freehang.com
-- http://37.139.0.10:3000/api
+- http://1.2.3.4:3000/api
 ```
 
-## Start demo
+## (OPTIONAL) Start dev on multi terminal on VPS with tmux
 
 ### Install tmux
 ```
 sudo apt install tmux
-```
 
 #### tmux basic command
-```
 # New session
 tmux
 
@@ -209,7 +234,7 @@ tmux ls
 npm i -g local-web-server
 ```
 
-### Start demo
+### Start debug mode
 ```
 # new/attach tmux section
 tmux a
@@ -218,17 +243,9 @@ tmux a
 cd freehang-api/client
 ws --http2
 
+# endpoint
+# https://1.2.3.4:8000/
+
 # detach tmux
 Ctrl + B + D
-```
-
-- Demo endpoint
-https://104.248.90.40:8000/
-
-# Install nginx
-```
-sudo apt update
-sudo apt install nginx
-sudo systemctl enable nginx
-sudo systemctl status nginx
 ```
