@@ -3,7 +3,7 @@ import {UsersService} from "../users/users.service";
 import {JwtService} from "@nestjs/jwt";
 import {JwtPayload} from "./jwt.payload";
 import {User} from "../users/schemas/user.schema";
-import {FirebaseAuthenticationService} from "@aginix/nestjs-firebase-admin/dist";
+import {FirebaseAuthenticationService} from "@aginix/nestjs-firebase-admin";
 import {TokenResponse} from "../models/responses/token.response";
 import * as admin from 'firebase-admin';
 import {CreateUserDto} from "../users/dto/create-user.dto";
